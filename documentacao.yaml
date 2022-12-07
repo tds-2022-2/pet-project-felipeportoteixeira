@@ -1,0 +1,142 @@
+swagger: "2.0"
+info:
+  title: API de filmes
+  description: API simples para armazenar informações de filmes.
+  version: 1.0.0
+host: localhost:8080
+basePath: /api/movies
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /:
+    get:
+      summary: Retorna uma lista com todos filmes.
+      description: Retorna todos objetos Filme inseridos na database.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Lista com objetos Filme.
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: UUID do usuário.
+              title:
+                type: string
+                description: Título do filme.
+              description:
+                type: string
+                description: Descrição do filme.
+              release:
+                type: string
+                description: Data de lançamento do filme.
+  /{id}:
+    get:
+      summary: Retorna um filme.
+      description: Retorna o objeto Filme por UUID.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          description: UUID do filme cadastrado.
+          required: true
+      responses:
+        200:
+          description: OK
+        404:
+          description: Filme não encontrado
+    delete:
+      summary: Delete um filme.
+      description: Deleta o objeto Filme por UUID.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          description: UUID do filme cadastrado.
+          required: true
+      responses:
+        200:
+          description: Objeto Filme   
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+                description: UUID do usuário.
+              title:
+                type: string
+                description: Título do filme.
+              description:
+                type: string
+                description: Descrição do filme.
+              release:
+                type: string
+                description: Data de lançamento do filme.
+        204:
+          description: Filme não existe
+    post:
+      summary: Cria um filme.
+      description: Insere um Filme enviando um objeto Filme.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          description: UUID do filme cadastrado.
+          required: true
+        - in: query
+          name: title
+          type: string
+          required: false
+        - in: query
+          name: description
+          type: string
+          required: false
+        - in: query
+          name: release
+          type: string
+          required: false
+      responses:
+        201:
+          description: OK   
+    put:
+      summary: Atualiza um filme.
+      description: Atualiza um Filme por UUID, enviando um objeto Filme.
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: string
+          description: UUID do filme cadastrado.
+          required: true
+        - in: query
+          name: title
+          type: string
+          required: false
+        - in: query
+          name: description
+          type: string
+          required: false
+        - in: query
+          name: release
+          type: string
+          required: false
+      responses:
+        200:
+          description: OK   
+        204:
+          description: Filme não existe
+          
+    
